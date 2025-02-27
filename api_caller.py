@@ -3,7 +3,6 @@ import time
 import os
 from dotenv import load_dotenv
 
-# .env 파일에서 환경 변수 로드
 load_dotenv()
 API_KEYS = [os.getenv('COINAPI_KEY1'), os.getenv('COINAPI_KEY2'), os.getenv('COINAPI_KEY3')]
 
