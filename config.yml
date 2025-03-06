@@ -1,0 +1,10 @@
+IS_PAID: true
+
+top_25_exchanges: [
+    "BINANCE", "KRAKEN", "COINBASE", "BITFINEX", "BITSTAMP", "HUOBI", "BYBIT", 
+    "FTX", "KUCOIN", "GEMINI", "BITHUMB", "POLONIEX", "BLOC", "COINEX", "CEXIO", 
+    "KRAKEN_FUTURES", "GATEIO", "BITGET", "MEXC", "COINONE", "COINSBIT", "LATOKEN", 
+    "EXMO", "ZB_COM", "BTC_MARKETS"
+  ]
+
+

@@ -1,2 +1,15 @@
+!requirements.txt 
+!symbols.json
+
 .env 
 .DS_Store 
+
+data/*
+*.txt
+*.json
+
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
