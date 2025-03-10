@@ -54,16 +54,16 @@ def concat_csv(a: str, b: str, directory: str) -> None:
     df.to_csv(f"{directory}/{a[0]}_{b[1]}.csv", index=False)
 
 
-def create_folders(periods: list[str], symbols: dict) -> None:
+def create_folders(directory:str, periods: list[str], symbols: dict) -> None:
     for period in periods:
-        os.makedirs(f"data/{period}", exist_ok=True)
+        os.makedirs(f"{directory}/{period}", exist_ok=True)
         for exchange, symbol_id in symbols.items():
             if not symbol_id:
                 continue
-            os.makedirs(f"data/{period}/{exchange}", exist_ok=True)
+            os.makedirs(f"{directory}/{period}/{exchange}", exist_ok=True)
             for s in (s for s in symbol_id if s):
                 os.makedirs(
-                    f'data/{period}/{exchange}/{"_".join(s.split("_")[1:])}',
+                    f'{directory}/{period}/{exchange}/{"_".join(s.split("_")[1:])}',
                     exist_ok=True,
                 )
 
@@ -93,6 +93,7 @@ def _prepare_data(fname: str) -> pd.DataFrame:
 
 
 def aggregate_data(
+    directory: str,
     output_fname: str,
     periods: list[str],
     exchanges: list[str],
@@ -103,16 +104,16 @@ def aggregate_data(
     fnames = fnames or sum(
         [
             [
-                f"data/{period}/{exc}/{symbol}/{duration_fname}.csv"
-                for symbol in os.listdir(f"data/{period}/{exc}")
+                f"{directory}/{period}/{exc}/{symbol}/{duration_fname}.csv"
+                for symbol in os.listdir(f"{directory}/{period}/{exc}")
                 if os.path.exists(
-                    f"data/{period}/{exc}/{symbol}/{duration_fname}.csv",
+                    f"{directory}/{period}/{exc}/{symbol}/{duration_fname}.csv",
                 )
             ]
             for period in periods
             for exc in exchanges
             for duration_fname in durations
-            if os.path.exists(f"data/{period}/{exc}")
+            if os.path.exists(f"{directory}/{period}/{exc}")
         ],
         [],
     )
@@ -125,6 +126,7 @@ def aggregate_data(
 
 
 def remove_file_by_duration(
+    directory: str,
     duration_fname: str,
     periods: list[str],
     exchanges: list[str],
@@ -132,11 +134,11 @@ def remove_file_by_duration(
     for x in (
         x
         for x in (
-            f"data/{period}/{exc}/{symbol}"
+            f"{directory}/{period}/{exc}/{symbol}"
             for period in periods
             for exc in exchanges
-            for symbol in os.listdir(f"data/{period}/{exc}")
-            if os.path.exists(f"data/{period}/{exc}/{symbol}")
+            for symbol in os.listdir(f"{directory}/{period}/{exc}")
+            if os.path.exists(f"{directory}/{period}/{exc}/{symbol}")
         )
         if os.path.exists(x)
     ):

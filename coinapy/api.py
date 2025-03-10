@@ -17,7 +17,7 @@ class Config:
     top_25_exchanges: list[str]
     currency_order: list[str]
     HEADERS: dict = field(default_factory=dict)
-    BASE_URL: str = field(default='https://rest.coinapi.io/v1')
+    BASE_URL: str = field(default='https://rest.coinapi.io/v1/')
 
 
 handlers = {
